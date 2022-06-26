@@ -1,2 +1,2 @@
 # SpringMVC-SpringDataJPA-Hibernate-application
-Spring MVC app using Spring Data Jpa and Hibernate
+Spring MVC com using Spring Data Jpa and Hibernate
