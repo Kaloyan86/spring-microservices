@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import com.app.repository.CarRepository;
 import com.app.service.CarService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 
 @Service
@@ -22,12 +24,15 @@ public class CarServiceImpl implements CarService {
     private static final String CARS_FILE_PATH = "src/main/resources/files/json/cars.json";
 
     private final Gson gson;
+    @PersistenceContext
+    private final EntityManager entityManager;
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;
     private final CarRepository carRepository;
 
-    public CarServiceImpl(Gson gson, ModelMapper modelMapper, ValidationUtil validationUtil, CarRepository carRepository) {
+    public CarServiceImpl(Gson gson, EntityManager entityManager, ModelMapper modelMapper, ValidationUtil validationUtil, CarRepository carRepository) {
         this.gson = gson;
+        this.entityManager = entityManager;
         this.modelMapper = modelMapper;
         this.validationUtil = validationUtil;
         this.carRepository = carRepository;
@@ -63,6 +68,24 @@ public class CarServiceImpl implements CarService {
 
         carRepository.findAllCarsOrderByPicturesThenByMake()
                 .forEach(car -> sb.append(car.toString()).append(System.lineSeparator()));
+
+        return sb.toString();
+    }
+
+    @Override
+    public String getCarsByPicturesCountThenByMake() {
+
+        StringBuilder sb = new StringBuilder();
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
+        Root<Car> carRoot = criteriaQuery.from(Car.class);
+        criteriaQuery.select(carRoot)
+                .orderBy(criteriaBuilder.desc(criteriaBuilder.size(carRoot.get("pictures"))), criteriaBuilder.asc(carRoot.get("make")));
+
+        List<Car> cars = entityManager.createQuery(criteriaQuery).getResultList();
+
+        cars.forEach(car -> sb.append(car.toString()).append(System.lineSeparator()));
 
         return sb.toString();
     }

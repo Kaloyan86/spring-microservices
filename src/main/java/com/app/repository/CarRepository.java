@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    List<Car> findAllByOrderByPicturesDescMakeAsc();
-
     @Query("SELECT c FROM Car c ORDER BY size(c.pictures) DESC , c.make ASC ")
     List<Car> findAllCarsOrderByPicturesThenByMake();
 }

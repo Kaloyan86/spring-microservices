@@ -1,14 +1,10 @@
 package com.app.service.impl;
 
-import com.app.models.dto.SellerSeedDto;
 import com.app.models.dto.SellerSeedRootDto;
-import com.app.models.entities.Picture;
 import com.app.models.entities.Seller;
 import com.app.repository.SellerRepository;
-import com.app.service.CarService;
 import com.app.util.ValidationUtil;
 import com.app.util.XmlParser;
-import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.app.service.SellerService;
@@ -24,15 +20,11 @@ public class SellerServiceImpl implements SellerService {
 
     private static final String SELLER_FILE_PATH = "src/main/resources/files/xml/sellers.xml";
 
-    private final Gson gson;
-    private final CarService carService;
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;
     private final SellerRepository sellerRepository;
 
-    public SellerServiceImpl(Gson gson, CarService carService, ModelMapper modelMapper, ValidationUtil validationUtil, SellerRepository sellerRepository) {
-        this.gson = gson;
-        this.carService = carService;
+    public SellerServiceImpl(ModelMapper modelMapper, ValidationUtil validationUtil, SellerRepository sellerRepository) {
         this.modelMapper = modelMapper;
         this.validationUtil = validationUtil;
         this.sellerRepository = sellerRepository;

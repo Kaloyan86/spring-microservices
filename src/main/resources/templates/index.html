@@ -17,6 +17,10 @@
                         <p><a class="btn btn-success mx-5 my-5" th:href="@{/export/cars-by-pictures}">Get all cars
                             ordered by pictures descending, then by make</a></p>
                     </th:block>
+                    <th:block th:if="${areImported == true}">
+
+                        <p><a class="btn btn-success mx-5 my-5" th:href="@{/export/cars-by-pictures2}">Get cars by pictures descending, then by make, using Criteria API</a></p>
+                    </th:block>
                     <div class="col-md-12 d-flex justify-content-center">
                         
                         <th:block th:if="${areImported == false}">

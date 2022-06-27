@@ -7,7 +7,6 @@ import com.app.service.CarService;
 import com.app.service.SellerService;
 import com.app.util.ValidationUtil;
 import com.app.util.XmlParser;
-import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.app.service.OfferService;
@@ -22,15 +21,13 @@ public class OfferServiceImpl implements OfferService {
 
     private static final String OFFERS_FILE_PATH = "src/main/resources/files/xml/offers.xml";
 
-    private final Gson gson;
     private final CarService carService;
     private final SellerService sellerService;
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;
     private final OfferRepository offerRepository;
 
-    public OfferServiceImpl(Gson gson, CarService carService, SellerService sellerService, ModelMapper modelMapper, ValidationUtil validationUtil, OfferRepository offerRepository) {
-        this.gson = gson;
+    public OfferServiceImpl(CarService carService, SellerService sellerService, ModelMapper modelMapper, ValidationUtil validationUtil, OfferRepository offerRepository) {
         this.carService = carService;
         this.sellerService = sellerService;
         this.modelMapper = modelMapper;

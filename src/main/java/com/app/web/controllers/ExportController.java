@@ -18,15 +18,23 @@ public class ExportController extends BaseController {
     @Autowired
     public ExportController(CarService carService) {
         this.carService = carService;
-   
+
     }
 
 
     @GetMapping("/cars-by-pictures")
-    public ModelAndView exportCarsByPictures(){
+    public ModelAndView exportCarsByPictures() {
         String carsByPictures = this.carService
                 .getCarsOrderByPicturesCountThenByMake();
 
-        return super.view("export/export-cars-by-pictures.html","carsByPictures", carsByPictures);
+        return super.view("export/export-cars-by-pictures.html", "carsByPictures", carsByPictures);
+    }
+
+    @GetMapping("/cars-by-pictures2")
+    public ModelAndView exportCarsByPicturesUsingCriteriaApi() {
+        String carsByPictures = this.carService
+                .getCarsByPicturesCountThenByMake();
+
+        return super.view("export/export-cars-by-pictures.html", "carsByPictures", carsByPictures);
     }
 }

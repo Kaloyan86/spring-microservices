@@ -14,5 +14,7 @@ public interface CarService {
 
     String getCarsOrderByPicturesCountThenByMake();
 
+    String getCarsByPicturesCountThenByMake();
+
     Car findById(Long car);
 }
