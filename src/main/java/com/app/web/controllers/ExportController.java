@@ -1,5 +1,6 @@
 package com.app.web.controllers;
 
+import com.app.web.annotations.TrackLatency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class ExportController extends BaseController {
     }
 
 
+    @TrackLatency(value = "JPA query")
     @GetMapping("/cars-by-pictures")
     public ModelAndView exportCarsByPictures() {
         String carsByPictures = this.carService
@@ -30,6 +32,7 @@ public class ExportController extends BaseController {
         return super.view("export/export-cars-by-pictures.html", "carsByPictures", carsByPictures);
     }
 
+    @TrackLatency(value = "Criteria API query")
     @GetMapping("/cars-by-pictures2")
     public ModelAndView exportCarsByPicturesUsingCriteriaApi() {
         String carsByPictures = this.carService
