@@ -1,9 +1,9 @@
-package com.app.models.entities;
+package com.app.model.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.app.models.entities.enums.Rating;
+import com.app.model.entities.enums.Rating;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.app.models.dto;
+package com.app.model.dto;
 
 import com.google.gson.annotations.Expose;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.app.service.impl;
 
-import com.app.models.dto.PictureSeedDto;
-import com.app.models.entities.Picture;
+import com.app.model.dto.PictureSeedDto;
+import com.app.model.entities.Picture;
 import com.app.repository.PictureRepository;
 import com.app.service.CarService;
 import com.app.util.ValidationUtil;

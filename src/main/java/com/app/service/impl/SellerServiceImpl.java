@@ -1,7 +1,7 @@
 package com.app.service.impl;
 
-import com.app.models.dto.SellerSeedRootDto;
-import com.app.models.entities.Seller;
+import com.app.model.dto.SellerSeedRootDto;
+import com.app.model.entities.Seller;
 import com.app.repository.SellerRepository;
 import com.app.util.ValidationUtil;
 import com.app.util.XmlParser;
@@ -11,8 +11,6 @@ import com.app.service.SellerService;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.NoSuchElementException;
 
 @Service
@@ -33,12 +31,6 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public boolean areImported() {
         return !sellerRepository.findAll().isEmpty();
-    }
-
-    @Override
-    public String readSellersFromFile() throws IOException {
-
-        return Files.readString(Path.of(SELLER_FILE_PATH));
     }
 
     @Override

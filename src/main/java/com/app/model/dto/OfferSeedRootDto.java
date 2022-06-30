@@ -1,4 +1,4 @@
-package com.app.models.dto;
+package com.app.model.dto;
 
 import lombok.Data;
 
@@ -9,11 +9,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Data
-@XmlRootElement(name = "sellers")
+@XmlRootElement(name = "offers")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SellerSeedRootDto {
+public class OfferSeedRootDto {
 
-    @XmlElement(name = "seller")
-    private List<SellerSeedDto> sellers;
-
+    @XmlElement(name = "offer")
+    private List<OfferSeedDto> offers;
 }

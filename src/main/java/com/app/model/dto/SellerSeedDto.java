@@ -1,6 +1,6 @@
-package com.app.models.dto;
+package com.app.model.dto;
 
-import com.app.models.entities.enums.Rating;
+import com.app.model.entities.enums.Rating;
 import lombok.Data;
 
 import javax.validation.constraints.Email;

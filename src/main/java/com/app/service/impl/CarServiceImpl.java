@@ -1,7 +1,8 @@
 package com.app.service.impl;
 
-import com.app.models.dto.CarSeedDto;
-import com.app.models.entities.Car;
+import com.app.model.dto.CarDto;
+import com.app.model.dto.CarSeedDto;
+import com.app.model.entities.Car;
 import com.app.util.ValidationUtil;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -62,20 +64,17 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public String getCarsOrderByPicturesCountThenByMake() {
+    public List<CarDto> getCarsOrderByPicturesCountThenByMake() {
 
-        StringBuilder sb = new StringBuilder();
-
-        carRepository.findAllCarsOrderByPicturesThenByMake()
-                .forEach(car -> sb.append(car.toString()).append(System.lineSeparator()));
-
-        return sb.toString();
+        return carRepository
+                .findAllCarsOrderByPicturesThenByMake()
+                .stream()
+                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public String getCarsByPicturesCountThenByMake() {
-
-        StringBuilder sb = new StringBuilder();
+    public List<CarDto> getCarsByPicturesCountThenByMake() {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
@@ -83,11 +82,12 @@ public class CarServiceImpl implements CarService {
         criteriaQuery.select(carRoot)
                 .orderBy(criteriaBuilder.desc(criteriaBuilder.size(carRoot.get("pictures"))), criteriaBuilder.asc(carRoot.get("make")));
 
-        List<Car> cars = entityManager.createQuery(criteriaQuery).getResultList();
-
-        cars.forEach(car -> sb.append(car.toString()).append(System.lineSeparator()));
-
-        return sb.toString();
+        return entityManager
+                .createQuery(criteriaQuery)
+                .getResultList()
+                .stream()
+                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                .collect(Collectors.toList());
     }
 
     @Override

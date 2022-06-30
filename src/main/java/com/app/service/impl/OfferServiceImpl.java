@@ -1,7 +1,7 @@
 package com.app.service.impl;
 
-import com.app.models.dto.OfferSeedRootDto;
-import com.app.models.entities.Offer;
+import com.app.model.dto.OfferSeedRootDto;
+import com.app.model.entities.Offer;
 import com.app.repository.OfferRepository;
 import com.app.service.CarService;
 import com.app.service.SellerService;
@@ -13,8 +13,6 @@ import com.app.service.OfferService;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -38,11 +36,6 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public boolean areImported() {
         return !offerRepository.findAll().isEmpty();
-    }
-
-    @Override
-    public String readOffersFileContent() throws IOException {
-        return Files.readString(Path.of(OFFERS_FILE_PATH));
     }
 
     @Override

@@ -1,7 +1,6 @@
-package com.app.models.dto;
+package com.app.model.dto;
 
 import lombok.Data;
-import org.apache.catalina.LifecycleState;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -10,10 +9,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Data
-@XmlRootElement(name = "offers")
+@XmlRootElement(name = "sellers")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class OfferSeedRootDto {
+public class SellerSeedRootDto {
 
-    @XmlElement(name = "offer")
-    private List<OfferSeedDto> offers;
+    @XmlElement(name = "seller")
+    private List<SellerSeedDto> sellers;
+
 }

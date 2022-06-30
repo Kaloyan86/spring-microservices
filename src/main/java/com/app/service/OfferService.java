@@ -7,7 +7,5 @@ public interface OfferService {
 
     boolean areImported();
 
-    String readOffersFileContent() throws IOException;
-	
 	String importOffers() throws IOException, JAXBException;
 }

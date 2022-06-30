@@ -1,8 +1,10 @@
 package com.app.service;
 
-import com.app.models.entities.Car;
+import com.app.model.dto.CarDto;
+import com.app.model.entities.Car;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface CarService {
 
@@ -12,9 +14,9 @@ public interface CarService {
 
     String importCars() throws IOException;
 
-    String getCarsOrderByPicturesCountThenByMake();
+    List<CarDto> getCarsOrderByPicturesCountThenByMake();
 
-    String getCarsByPicturesCountThenByMake();
+    List<CarDto> getCarsByPicturesCountThenByMake();
 
     Car findById(Long car);
 }
