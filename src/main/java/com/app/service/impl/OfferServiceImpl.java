@@ -1,12 +1,12 @@
 package com.app.service.impl;
 
-import com.app.model.dto.OfferSeedRootDto;
-import com.app.model.entities.Offer;
-import com.app.repository.OfferRepository;
+import com.app.api.OfferSeedRootDto;
+import com.app.data.model.Offer;
+import com.app.data.repository.OfferRepository;
 import com.app.service.CarService;
 import com.app.service.SellerService;
-import com.app.util.ValidationUtil;
-import com.app.util.XmlParser;
+import com.app.service.util.ValidationUtil;
+import com.app.service.util.XmlParser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.app.service.OfferService;

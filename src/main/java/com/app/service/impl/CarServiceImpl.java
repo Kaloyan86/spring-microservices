@@ -1,13 +1,13 @@
 package com.app.service.impl;
 
-import com.app.model.dto.CarDto;
-import com.app.model.dto.CarSeedDto;
-import com.app.model.entities.Car;
-import com.app.util.ValidationUtil;
+import com.app.api.CarDto;
+import com.app.api.CarSeedDto;
+import com.app.data.model.Car;
+import com.app.service.util.ValidationUtil;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import com.app.repository.CarRepository;
+import com.app.data.repository.CarRepository;
 import com.app.service.CarService;
 
 import javax.persistence.EntityManager;

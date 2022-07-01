@@ -1,10 +1,10 @@
 package com.app.service.impl;
 
-import com.app.model.dto.SellerSeedRootDto;
-import com.app.model.entities.Seller;
-import com.app.repository.SellerRepository;
-import com.app.util.ValidationUtil;
-import com.app.util.XmlParser;
+import com.app.api.SellerSeedRootDto;
+import com.app.data.model.Seller;
+import com.app.data.repository.SellerRepository;
+import com.app.service.util.ValidationUtil;
+import com.app.service.util.XmlParser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.app.service.SellerService;

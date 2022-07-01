@@ -1,7 +1,7 @@
 package com.app.service;
 
-import com.app.model.dto.CarDto;
-import com.app.model.entities.Car;
+import com.app.api.CarDto;
+import com.app.data.model.Car;
 
 import java.io.IOException;
 import java.util.List;
