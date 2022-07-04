@@ -3,6 +3,7 @@ package com.app.service.impl;
 import com.app.api.CarDto;
 import com.app.api.CarSeedDto;
 import com.app.data.model.Car;
+import com.app.error.CarNotFoundException;
 import com.app.service.util.ValidationUtil;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.app.error.Constants.carNotFound;
 
 
 @Service
@@ -92,6 +95,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(Long id) {
-        return carRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(carNotFound(id)));
+    }
+
+    public CarDto getCarById(Long id) {
+        final Car car = findById(id);
+        return new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size());
     }
 }

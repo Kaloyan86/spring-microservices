@@ -19,4 +19,6 @@ public interface CarService {
     List<CarDto> getCarsByPicturesCountThenByMake();
 
     Car findById(Long car);
+
+    CarDto getCarById(Long id);
 }

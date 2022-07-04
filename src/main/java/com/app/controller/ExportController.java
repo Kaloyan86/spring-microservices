@@ -5,9 +5,12 @@ import com.app.config.annotations.TrackLatency;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.app.service.CarService;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -32,5 +35,12 @@ public class ExportController extends BaseController {
     public ResponseEntity<List<CarDto>> exportCarsByPicturesUsingCriteriaApi() {
 
         return ResponseEntity.ok(this.carService.getCarsByPicturesCountThenByMake());
+    }
+
+
+    @GetMapping("/car-by-id/{id}")
+    public ResponseEntity<CarDto> getCarById(@PathVariable Long id) {
+
+        return ResponseEntity.ok(this.carService.getCarById(id));
     }
 }
