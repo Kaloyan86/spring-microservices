@@ -1,6 +1,6 @@
 package com.app.service;
 
-import com.app.data.model.Seller;
+import com.app.model.Seller;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;

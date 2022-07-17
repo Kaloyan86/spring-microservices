@@ -1,7 +1,8 @@
 package com.app.service;
 
 import com.app.api.CarDto;
-import com.app.data.model.Car;
+import com.app.api.CarSeedDto;
+import com.app.model.Car;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,4 +22,12 @@ public interface CarService {
     Car findById(Long car);
 
     CarDto getCarById(Long id);
+
+    List<CarDto> getAllCars();
+
+    CarSeedDto createCar(CarSeedDto car);
+
+    void deleteCar(Long id);
+
+    CarDto updateCar(Long id, CarSeedDto carSeedDto);
 }

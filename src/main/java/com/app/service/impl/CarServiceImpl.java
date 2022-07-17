@@ -2,13 +2,13 @@ package com.app.service.impl;
 
 import com.app.api.CarDto;
 import com.app.api.CarSeedDto;
-import com.app.data.model.Car;
+import com.app.model.Car;
 import com.app.error.CarNotFoundException;
 import com.app.service.util.ValidationUtil;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import com.app.data.repository.CarRepository;
+import com.app.repository.CarRepository;
 import com.app.service.CarService;
 
 import javax.persistence.EntityManager;
@@ -17,6 +17,7 @@ import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -100,6 +101,40 @@ public class CarServiceImpl implements CarService {
 
     public CarDto getCarById(Long id) {
         final Car car = findById(id);
+        return new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size());
+    }
+
+    @Override
+    public List<CarDto> getAllCars() {
+        return carRepository
+                .findAll()
+                .stream()
+                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CarSeedDto createCar(CarSeedDto carSeedDto) {
+        final Car car = modelMapper.map(carSeedDto, Car.class);
+        carRepository.save(car);
+        return carSeedDto;
+    }
+
+    @Override
+    public void deleteCar(Long id) {
+        carRepository.delete(findById(id));
+    }
+
+    @Override
+    public CarDto updateCar(Long id, CarSeedDto carSeedDto) {
+        Car car = findById(id);
+        car.setModel(carSeedDto.getModel());
+        car.setMake(carSeedDto.getMake());
+        car.setKilometers(carSeedDto.getKilometers());
+        car.setRegisteredOn(modelMapper.map(carSeedDto.getRegisteredOn(), LocalDate.class));
+
+        carRepository.save(car);
+
         return new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size());
     }
 }

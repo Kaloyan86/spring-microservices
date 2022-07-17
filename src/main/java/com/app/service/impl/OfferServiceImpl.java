@@ -1,8 +1,8 @@
 package com.app.service.impl;
 
 import com.app.api.OfferSeedRootDto;
-import com.app.data.model.Offer;
-import com.app.data.repository.OfferRepository;
+import com.app.model.Offer;
+import com.app.repository.OfferRepository;
 import com.app.service.CarService;
 import com.app.service.SellerService;
 import com.app.service.util.ValidationUtil;

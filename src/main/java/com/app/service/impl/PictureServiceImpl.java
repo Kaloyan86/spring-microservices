@@ -1,8 +1,8 @@
 package com.app.service.impl;
 
 import com.app.api.PictureSeedDto;
-import com.app.data.model.Picture;
-import com.app.data.repository.PictureRepository;
+import com.app.model.Picture;
+import com.app.repository.PictureRepository;
 import com.app.service.CarService;
 import com.app.service.util.ValidationUtil;
 import com.google.gson.Gson;

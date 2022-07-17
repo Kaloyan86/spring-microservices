@@ -10,10 +10,10 @@ import javax.validation.constraints.Size;
 public class CarSeedDto {
 
     @Expose
-    @Size(min = 2, max = 20,message = "Size must be")
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20")
     private String make;
     @Expose
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20")
     private String model;
     @Expose
     @Positive

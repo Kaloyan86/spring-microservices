@@ -1,19 +1,21 @@
 package com.app.error;
 
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 @Getter
-@Setter
 public class ErrorStatus {
 
     private String message;
+    private List<String> messages;
 
-    public ErrorStatus(String message) {
+    @Builder(setterPrefix = "with", access = AccessLevel.PUBLIC)
+    public ErrorStatus(String message, List<String> messages) {
         this.message = message;
+        this.messages = messages;
     }
-
 }

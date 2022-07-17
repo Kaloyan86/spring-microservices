@@ -1,6 +1,6 @@
 package com.app.api;
 
-import com.app.data.model.Rating;
+import com.app.model.Rating;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
