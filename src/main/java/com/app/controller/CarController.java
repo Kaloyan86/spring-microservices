@@ -50,7 +50,7 @@ public class CarController {
     }
 
     @PostMapping()
-    public ResponseEntity<CarSeedDto> createEmployee(@Valid @RequestBody CarSeedDto car) {
+    public ResponseEntity<CarSeedDto> createCar(@Valid @RequestBody CarSeedDto car) {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
