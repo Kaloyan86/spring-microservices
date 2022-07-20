@@ -52,9 +52,8 @@ public class CarController {
     @PostMapping()
     public ResponseEntity<CarSeedDto> createCar(@Valid @RequestBody CarSeedDto car) {
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(carService.createCar(car));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(carService.createCar(car));
     }
 
     @PutMapping("/{id}")
@@ -67,9 +66,8 @@ public class CarController {
     public ResponseEntity<String> delete(@PathVariable Long id) {
 
         carService.deleteCar(id);
-        return ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .body(String.format("Car with id: %d has been deleted successfully", id));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                             .body(String.format("Car with id: %d has been deleted successfully", id));
     }
 
 }

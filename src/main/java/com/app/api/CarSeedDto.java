@@ -3,12 +3,14 @@ package com.app.api;
 import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Data
 @Builder
+@NoArgsConstructor
 public class CarSeedDto {
 
     @Expose

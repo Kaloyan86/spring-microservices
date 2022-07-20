@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.app.error.Constants.UNEXPECTED_ERROR;
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -36,7 +38,7 @@ public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ErrorStatus> handleExceptions(Exception ex) {
 
-        log.error("Exception occurred: " + ex.getMessage());
+        log.error(UNEXPECTED_ERROR + ex.getMessage());
 
         ex.printStackTrace();
 

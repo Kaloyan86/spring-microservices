@@ -59,10 +59,10 @@ public class CarServiceImpl implements CarService {
         StringBuilder sb = new StringBuilder();
 
         Arrays.stream(gson.fromJson(readCarsFileContent(), CarSeedDto[].class))
-                .peek(c -> sb.append(validationUtil.isValid(c) ? String.format("Successfully imported car - %s - %s%n", c.getMake(), c.getModel()) : String.format("Invalid car%n")))
-                .filter(validationUtil::isValid)
-                .map(carSeedDto -> modelMapper.map(carSeedDto, Car.class))
-                .forEach(carRepository::save);
+              .peek(c -> sb.append(validationUtil.isValid(c) ? String.format("Successfully imported car - %s - %s%n", c.getMake(), c.getModel()) : String.format("Invalid car%n")))
+              .filter(validationUtil::isValid)
+              .map(carSeedDto -> modelMapper.map(carSeedDto, Car.class))
+              .forEach(carRepository::save);
 
         return sb.toString();
     }
@@ -70,11 +70,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarDto> getCarsOrderByPicturesCountThenByMake() {
 
-        return carRepository
-                .findAllCarsOrderByPicturesThenByMake()
-                .stream()
-                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
-                .collect(Collectors.toList());
+        return carRepository.findAllCarsOrderByPicturesThenByMake()
+                            .stream()
+                            .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                            .collect(Collectors.toList());
     }
 
     @Override
@@ -84,14 +83,13 @@ public class CarServiceImpl implements CarService {
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> carRoot = criteriaQuery.from(Car.class);
         criteriaQuery.select(carRoot)
-                .orderBy(criteriaBuilder.desc(criteriaBuilder.size(carRoot.get("pictures"))), criteriaBuilder.asc(carRoot.get("make")));
+                     .orderBy(criteriaBuilder.desc(criteriaBuilder.size(carRoot.get("pictures"))), criteriaBuilder.asc(carRoot.get("make")));
 
-        return entityManager
-                .createQuery(criteriaQuery)
-                .getResultList()
-                .stream()
-                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
-                .collect(Collectors.toList());
+        return entityManager.createQuery(criteriaQuery)
+                            .getResultList()
+                            .stream()
+                            .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                            .collect(Collectors.toList());
     }
 
     @Override
@@ -107,11 +105,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarDto> getAllCars() {
         List<Car> cars = carRepository.findAll();
-        return carRepository
-                .findAll()
-                .stream()
-                .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
-                .collect(Collectors.toList());
+        return carRepository.findAll()
+                            .stream()
+                            .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))
+                            .collect(Collectors.toList());
     }
 
     @Override
