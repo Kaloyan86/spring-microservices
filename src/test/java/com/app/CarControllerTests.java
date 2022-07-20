@@ -98,6 +98,25 @@ public class CarControllerTests {
     }
 
     @Test
+    public void getCarById_whenGetMethod() throws Exception {
+
+        Car car = modelMapper.map(cars.get(0), Car.class);
+        car.setId(1L);
+
+        given(carService.getCarById(car.getId())).willReturn(modelMapper.map(car, CarDto.class));
+
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + car.getId())
+                                                                       .contentType(MediaType.APPLICATION_JSON));
+
+        response.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.make", is(car.getMake())))
+                .andExpect(jsonPath("$.model", is(car.getModel())))
+                .andExpect(jsonPath("$.kilometers", is(car.getKilometers())))
+                .andExpect(jsonPath("$.registeredOn", is(car.getRegisteredOn().toString())));
+    }
+
+    @Test
     public void givenListOfCars_whenGetAllCars_thenReturnCarsList() throws Exception {
 
         given(carService.getAllCars()).willReturn(cars);
@@ -152,7 +171,7 @@ public class CarControllerTests {
     }
 
     @Test
-    public void removeUserById_whenDeleteMethod() throws Exception {
+    public void removeCarById_whenDeleteMethod() throws Exception {
         Car car = modelMapper.map(cars.get(0), Car.class);
         car.setId(1L);
 
