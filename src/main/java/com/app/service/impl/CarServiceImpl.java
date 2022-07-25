@@ -104,7 +104,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDto> getAllCars() {
-        List<Car> cars = carRepository.findAll();
+
         return carRepository.findAll()
                             .stream()
                             .map(car -> new CarDto(car.getMake(), car.getModel(), car.getKilometers(), car.getRegisteredOn().toString(), car.getPictures().size()))

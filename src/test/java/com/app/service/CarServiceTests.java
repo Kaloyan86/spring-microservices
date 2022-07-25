@@ -1,37 +1,33 @@
-package com.app;
+package com.app.service;
 
 
 import java.util.List;
 
+import com.app.config.AbstractIntegrationTest;
 import com.app.api.CarDto;
 import com.app.api.CarSeedDto;
 import com.app.error.CarNotFoundException;
-import com.app.service.CarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @Testcontainers
 @SpringBootTest
-@AutoConfigureMockMvc
 public class CarServiceTests extends AbstractIntegrationTest {
 
     @Autowired
     private CarService carService;
-    @Autowired
-    MockMvc mockMvc;
 
     @Test
     public void shouldGetCarById() {
 
-        CarDto car = carService.getCarById(1L);
+        CarDto car = carService.getCarById(2L);
 
         assertThat(car).isNotNull();
     }
@@ -89,7 +85,14 @@ public class CarServiceTests extends AbstractIntegrationTest {
     }
 
     @Test
-    public void whenGivenId_shouldDeleteUser_ifFound(){
-        // TODO
+    public void whenGivenId_shouldDeleteCar_ifFound() {
+
+        // before delete
+        assertThat(carService.getCarById(1L)).isNotNull();
+
+        carService.deleteCar(1L);
+
+        // after delete
+        assertThrows(CarNotFoundException.class, () -> carService.getCarById(1L));
     }
 }

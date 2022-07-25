@@ -1,4 +1,4 @@
-package com.app;
+package com.app.controller;
 
 import com.app.api.CarDto;
 import com.app.api.CarSeedDto;
