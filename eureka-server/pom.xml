@@ -8,10 +8,10 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.app</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com</groupId>
+	<artifactId>eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>eureka-server</name>
 	<description>spring-eureka-server</description>
 	<properties>
 		<java.version>11</java.version>
