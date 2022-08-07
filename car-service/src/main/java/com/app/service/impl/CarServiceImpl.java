@@ -6,7 +6,13 @@ import com.app.model.Car;
 import com.app.error.CarNotFoundException;
 import com.app.service.util.ValidationUtil;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.modelmapper.ModelMapper;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import com.app.repository.CarRepository;
 import com.app.service.CarService;
@@ -23,7 +29,7 @@ import java.util.stream.Collectors;
 
 import static com.app.error.Constants.carNotFound;
 
-
+@Slf4j
 @Service
 public class CarServiceImpl implements CarService {
 
@@ -35,13 +41,17 @@ public class CarServiceImpl implements CarService {
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;
     private final CarRepository carRepository;
+    private final NewTopic topic;
+    private final KafkaTemplate<String, CarSeedDto> kafkaTemplate;
 
-    public CarServiceImpl(Gson gson, EntityManager entityManager, ModelMapper modelMapper, ValidationUtil validationUtil, CarRepository carRepository) {
+    public CarServiceImpl(Gson gson, EntityManager entityManager, ModelMapper modelMapper, ValidationUtil validationUtil, CarRepository carRepository, NewTopic topic, KafkaTemplate<String, CarSeedDto> kafkaTemplate) {
         this.gson = gson;
         this.entityManager = entityManager;
         this.modelMapper = modelMapper;
         this.validationUtil = validationUtil;
         this.carRepository = carRepository;
+        this.topic = topic;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
@@ -115,6 +125,12 @@ public class CarServiceImpl implements CarService {
     public CarSeedDto createCar(CarSeedDto carSeedDto) {
         final Car car = modelMapper.map(carSeedDto, Car.class);
         carRepository.save(car);
+        Message<CarSeedDto> message = MessageBuilder.withPayload(carSeedDto)
+                                                    .setHeader(KafkaHeaders.TOPIC, topic.name())
+                                                    .build();
+        log.info(String.format("Create car event => %s", carSeedDto));
+
+        kafkaTemplate.send(message);
         return carSeedDto;
     }
 
