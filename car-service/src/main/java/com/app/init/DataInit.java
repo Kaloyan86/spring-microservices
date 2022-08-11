@@ -7,8 +7,14 @@ import com.app.service.PictureService;
 import com.app.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+@ConditionalOnProperty(
+prefix = "command.line.runner",
+value = "enabled",
+havingValue = "true",
+matchIfMissing = true)
 @Component
 public class DataInit implements CommandLineRunner {
 

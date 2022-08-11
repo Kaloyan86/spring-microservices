@@ -5,6 +5,7 @@
  */
 
 plugins {
+    id 'com.google.cloud.tools.jib' version '3.2.1'
     id 'java'
     id 'maven-publish'
 }
@@ -40,7 +41,7 @@ dependencies {
 }
 
 group = 'com'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 description = 'car-service'
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -57,6 +58,17 @@ tasks.withType(JavaCompile) {
 }
 targetCompatibility = JavaVersion.VERSION_11
 
-test{
+test {
     useJUnitPlatform()
+}
+jib {
+    jib.container.creationTime = 'USE_CURRENT_TIMESTAMP'
+    jib.to {
+        image = 'kaloyankostadinov/car-service'
+        tags = [version, 'latest']
+        auth {
+            username = property('username')
+            password = property('password')
+        }
+    }
 }
