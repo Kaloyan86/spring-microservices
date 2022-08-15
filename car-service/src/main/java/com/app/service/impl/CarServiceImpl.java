@@ -33,7 +33,7 @@ import static com.app.error.Constants.carNotFound;
 @Service
 public class CarServiceImpl implements CarService {
 
-    private static final String CARS_FILE_PATH = "src/main/resources/files/json/cars.json";
+    private static final String CARS_FILE_PATH = "car-service/src/main/resources/files/json/cars.json";
 
     private final Gson gson;
     @PersistenceContext

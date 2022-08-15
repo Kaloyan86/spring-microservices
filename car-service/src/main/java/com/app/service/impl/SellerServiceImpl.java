@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 @Service
 public class SellerServiceImpl implements SellerService {
 
-    private static final String SELLER_FILE_PATH = "src/main/resources/files/xml/sellers.xml";
+    private static final String SELLER_FILE_PATH = "car-service/src/main/resources/files/xml/sellers.xml";
 
     private final ModelMapper modelMapper;
     private final ValidationUtil validationUtil;

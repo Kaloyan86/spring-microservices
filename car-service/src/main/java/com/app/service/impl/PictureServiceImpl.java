@@ -18,7 +18,7 @@ import java.util.Arrays;
 @Service
 public class PictureServiceImpl implements PictureService {
 
-    private static final String PICTURE_FILE_PATH = "src/main/resources/files/json/pictures.json";
+    private static final String PICTURE_FILE_PATH = "car-service/src/main/resources/files/json/pictures.json";
 
     private final Gson gson;
     private final CarService carService;

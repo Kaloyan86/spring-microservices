@@ -17,7 +17,7 @@ import java.io.IOException;
 @Service
 public class OfferServiceImpl implements OfferService {
 
-    private static final String OFFERS_FILE_PATH = "src/main/resources/files/xml/offers.xml";
+    private static final String OFFERS_FILE_PATH = "car-service/src/main/resources/files/xml/offers.xml";
 
     private final CarService carService;
     private final SellerService sellerService;
