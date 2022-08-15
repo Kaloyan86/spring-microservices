@@ -1,2 +1,2 @@
-# SpringMVC-SpringDataJPA-Hibernate-application
-Spring REST-full service using Spring Data Jpa and Hibernate
+# Spring microservices
+Spring REST-full service using Spring Data Jpa, Hibernate, Kafka
